@@ -1,0 +1,15 @@
+server:
+  port: 8541
+
+spring:
+  application:
+    name: spring-cloud-config
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://example.git/
+          username: root
+          password: root
+          searchPaths: '{application}'
+          default-label: master

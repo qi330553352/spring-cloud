@@ -1,0 +1,25 @@
+server:
+  port: 8663
+
+spring:
+  application:
+    name: base-payment-plugins
+
+eureka:
+  instance:
+    hostname: ${spring.cloud.client.ip-address}
+    preferIpAddress: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+  client:
+    service-url:
+      defaultZone: http://120.76.189.9:8761/eureka/
+
+mongodb:
+  primary:
+    host: 192.168.9.60
+    port: 20000
+    database: test
+  secondary:
+    host: 192.168.9.60
+    port: 20000
+    database: test1

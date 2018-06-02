@@ -1,0 +1,29 @@
+server:
+  port: 8661
+
+eureka:
+  instance:
+    hostname: ${spring.cloud.client.ip-address}
+    preferIpAddress: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+  client:
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:8761/eureka/
+
+spring:
+  application:
+    name: base-info-plugins
+  mail:
+    properties:
+      mail:
+        transport:
+          protocol: smtp
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+        debug: true
+    host: smtp.qq.com
+    username: 330553352@qq.com
+    password: siuggfkknedhcaaj
