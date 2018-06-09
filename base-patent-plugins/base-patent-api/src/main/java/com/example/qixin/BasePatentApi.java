@@ -1,7 +1,5 @@
 package com.example.qixin;
 
-import org.springframework.boot.SpringApplication;
-
 /**
  * 创  建   时  间： 2018/6/1 21:41
  * 版           本: V1.0
