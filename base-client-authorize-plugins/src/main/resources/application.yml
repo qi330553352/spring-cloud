@@ -1,0 +1,12 @@
+server:
+  port: 8080
+
+security:
+  oauth2:
+    client:
+      client-id: vshzx6xejxtK5YzbhQOPlDX7fLwTmt2g
+      client-secret: wefwcdsLz6dvYwqxfpavLkNoopxXpi2n
+      access-token-uri: http://openapi.baidu.com/oauth/2.0/token
+      user-authorization-uri: http://openapi.baidu.com/oauth/2.0/authorize
+    resource:
+      userInfoUri: http://127.0.0.1:8080/callback
