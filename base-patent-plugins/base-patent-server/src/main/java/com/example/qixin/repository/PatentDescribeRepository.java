@@ -14,8 +14,8 @@ import reactor.core.publisher.Flux;
  * 公           司: 广州专利保姆有限公司
  */
 @Repository
-public interface PatentDescribeRepository extends ReactiveMongoRepository<PatentDescribe, String> {
+public interface PatentDescribeRepository extends ReactiveMongoRepository<PatentDescribe,String> {
 
-    @Query("{'teachers.userId':?0}")
-    Flux<PatentDescribe> findStudents(String id);
+//    @Query("{'teachers.userId':?0}")
+//    Flux<PatentDescribe> findStudents(String id);
 }
