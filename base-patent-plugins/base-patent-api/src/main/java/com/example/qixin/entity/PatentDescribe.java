@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.io.Serializable;
+
 /**
  * 创  建   时  间： 2018/6/1 21:44
  * 版           本: V1.0
@@ -14,10 +16,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * 公           司: 广州专利保姆有限公司
  */
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
+/*@AllArgsConstructor
+@NoArgsConstructor*/
 @Document(collection = "PatentDescribe")
-public class PatentDescribe {
+public class PatentDescribe implements Serializable {
 
     @Id
     private String id;
