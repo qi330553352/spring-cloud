@@ -1,12 +1,17 @@
 package com.example.qixin.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 创  建   时  间： 2018/6/1 21:44
@@ -29,5 +34,4 @@ public class PatentDescribe implements Serializable {
     private String zqx;
     /* ABS */
     private String abs;
-
 }

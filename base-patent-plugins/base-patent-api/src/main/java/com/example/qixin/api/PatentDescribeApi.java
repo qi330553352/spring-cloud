@@ -2,13 +2,14 @@ package com.example.qixin.api;
 
 import com.example.qixin.entity.PatentDescribe;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.data.domain.Example;
+import org.springframework.http.ResponseEntity;
+import org.springframework.lang.NonNull;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -19,14 +20,27 @@ import java.util.List;
  */
 @RequestMapping("/patentDescribeApi")
 @FeignClient( name = "base-patent-plugins")
-public interface PatentDescribeApi extends BaseDao<PatentDescribe,String> {
-
-    @PostMapping("/addBeans")
-    Flux<PatentDescribe> addBeans(@RequestBody List<PatentDescribe> beans);
-
-    @PostMapping("/addBean")
-    Mono<PatentDescribe> addBean(@RequestBody PatentDescribe bean);
+public interface PatentDescribeApi{
 
     @GetMapping("/findTotal")
     Mono<Long> findTotal();
+    @GetMapping("/findBeans")
+    Flux<PatentDescribe> findBeans(@Valid @RequestBody Example<PatentDescribe> bean);
+    @GetMapping("/findById/{id}")
+    Mono<PatentDescribe> findById(@PathVariable String id);
+    @GetMapping("/getById/{id}")
+    Mono<ResponseEntity<PatentDescribe>> getById(@PathVariable String id);
+    @GetMapping("/findPageInfo")
+    Flux<PatentDescribe> findPageInfo(@Valid @RequestBody Example<PatentDescribe> bean);
+
+    @PostMapping("/addBeans")
+    Flux<PatentDescribe> addBeans(@Valid @RequestBody List<PatentDescribe> beans);
+    @PostMapping("/addBean")
+    Mono<PatentDescribe> addBean(@RequestBody @Valid PatentDescribe bean);
+
+    @PutMapping("/updateById/{id}")
+    Mono<ResponseEntity<PatentDescribe>> updateById(@PathVariable String id, @Valid @RequestBody PatentDescribe bean);
+
+    @DeleteMapping("/deleteById/{id}")
+    Mono<ResponseEntity<Void>> deleteById(@PathVariable String id);
 }
