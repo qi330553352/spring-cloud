@@ -3,6 +3,7 @@ package com.example.qixin.service;
 import com.example.qixin.api.PatentDescribeApi;
 import com.example.qixin.entity.PatentDescribe;
 import com.example.qixin.repository.PatentDescribeRepository;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Sort;
@@ -69,9 +70,15 @@ public class PatentDescribeService implements PatentDescribeApi {
     }
 
     @Override
+    @HystrixCommand(fallbackMethod = "findTotalError")
     public Mono<Long> findTotal() {
-
+        int a = 1/0;
         return repository.count();
+    }
+
+    public Mono<Long> findTotalError(){
+
+        return Mono.just(Long.max(1L,100L));
     }
 
     @Override
