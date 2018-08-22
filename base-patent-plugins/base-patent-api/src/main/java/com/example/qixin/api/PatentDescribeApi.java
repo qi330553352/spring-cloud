@@ -1,10 +1,10 @@
 package com.example.qixin.api;
 
+import com.example.qixin.config.FeignConfig;
 import com.example.qixin.entity.PatentDescribe;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.data.domain.Example;
 import org.springframework.http.ResponseEntity;
-import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -19,11 +19,13 @@ import java.util.List;
  * 版  权   所  有: 版权所有(C)2016-2026
  */
 @RequestMapping("/patentDescribeApi")
-@FeignClient( name = "base-patent-plugins")
+@FeignClient( name = "base-patent-plugins",configuration = FeignConfig.class)
 public interface PatentDescribeApi{
 
     @GetMapping("/findTotal")
     Mono<Long> findTotal();
+
+
     @GetMapping("/findBeans")
     Flux<PatentDescribe> findBeans(@Valid @RequestBody Example<PatentDescribe> bean);
     @GetMapping("/findById/{id}")

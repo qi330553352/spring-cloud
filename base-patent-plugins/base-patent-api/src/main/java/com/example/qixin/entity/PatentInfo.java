@@ -5,7 +5,9 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.annotation.Version;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -26,6 +28,10 @@ public class PatentInfo {
 
     @Id
     private String id;
+    @Field("patentDescribe")
+    private PatentDescribe patentDescribe;
+    @DBRef
+    private PatentDescribe describe;
     private String mc;        //名称，不允许为空，用户名唯一
     @NotBlank
     @Size(max = 140)
