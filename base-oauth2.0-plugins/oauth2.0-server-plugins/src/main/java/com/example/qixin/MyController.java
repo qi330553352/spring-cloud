@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
  * 版  权   所  有: 版权所有(C)2016-2026
  */
 @RestController
-public class Controller {
+public class MyController {
 
     @GetMapping("/api/get")
     public String get() {

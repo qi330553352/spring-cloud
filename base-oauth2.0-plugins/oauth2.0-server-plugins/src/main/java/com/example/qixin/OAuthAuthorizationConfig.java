@@ -1,7 +1,5 @@
 package com.example.qixin;
 
-import com.example.qixin.configuration.CustomJdbcAuthorizationCodeServices;
-import com.example.qixin.configuration.CustomTokenEnhancer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -33,21 +31,25 @@ public class OAuthAuthorizationConfig extends AuthorizationServerConfigurerAdapt
 
     @Autowired
     private DataSource dataSource;
+    @Autowired
+    private AuthorizationEndpoint authorizationEndpoint;
+
+    @Bean
+    public TokenStore tokenStore() {
+
+        return new JdbcTokenStore(dataSource);
+    }
 
     @Bean
     public ApprovalStore approvalStore() {
 
         return new JdbcApprovalStore(dataSource);
     }
-    @Bean
+
+    @Bean 	//使用默认的授权码
     protected AuthorizationCodeServices authorizationCodeServices() {
 
         return new JdbcAuthorizationCodeServices(dataSource);
-    }
-    @Bean
-    public TokenStore tokenStore() {
-
-        return new JdbcTokenStore(dataSource);
     }
 
     @Override
@@ -56,15 +58,25 @@ public class OAuthAuthorizationConfig extends AuthorizationServerConfigurerAdapt
         clients.jdbc(dataSource); // oauth_client_details
     }
 
-    @Override
-    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-        endpoints.approvalStore(approvalStore())                            // oauth_approvals
-                .authorizationCodeServices(authorizationCodeServices())    // oauth_code
-                .tokenStore(tokenStore());                                 // oauth_access_token & oauth_refresh_token
-    }
     @Override //解决Spring Security OAuth在访问/oauth/token时候报401 authentication is required
     public void configure(AuthorizationServerSecurityConfigurer oauthServer)throws Exception {
 
         oauthServer.allowFormAuthenticationForClients();
     }
+
+    //---------3---------------- 自定义页面
+
+    @PostConstruct
+    public void init() {
+        authorizationEndpoint.setUserApprovalPage("forward:/oauth/my_approval_page");
+        authorizationEndpoint.setErrorPage("forward:/oauth/my_error_page");
+    }
+
+    @Override
+    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+        endpoints.approvalStore(approvalStore()) 							// oauth_approvals
+                .authorizationCodeServices(authorizationCodeServices()) 	// oauth_code
+                .tokenStore(tokenStore()); 								// oauth_access_token & oauth_refresh_token
+    }
+
 }

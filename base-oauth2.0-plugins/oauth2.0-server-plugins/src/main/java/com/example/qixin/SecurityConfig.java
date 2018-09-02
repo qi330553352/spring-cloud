@@ -4,10 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
@@ -27,23 +25,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private DataSource dataSource;
 
+
+    @Override // 配置默认登陆页面，登陆失败页面
+    protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
+                .anyRequest().authenticated()
+                .and()
+                .csrf().disable() //关闭CSRF
+                .formLogin()
+                .loginPage("/login")    //登录url
+                .failureUrl("/oauth/authorize")
+                .permitAll()
+                .and()
+                .logout().permitAll()
+                .and()
+                .httpBasic().realmName("OAuth Server");
+    }
+
     @Override //基于数据库表进行认证 (配置user-detial服务)
     protected void configure(AuthenticationManagerBuilder auth) throws Exception{
 
-        //auth.jdbcAuthentication().dataSource(dataSource);
-        auth.inMemoryAuthentication()
-                .withUser("user").password("123").roles("USER")
-                .and()
-                .withUser("admin").password("123").roles("ADMIN");
-    }
-
-    @Override // 配置默认登陆页面，登陆失败页面 （配置Spring Security的Filter链）
-    protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable();
-        http.authorizeRequests()
-                .antMatchers("/oauth/authorize").authenticated()
-                .and()
-                .httpBasic().realmName("OAuth Server");
+        auth.jdbcAuthentication().dataSource(dataSource);
     }
 
 }
