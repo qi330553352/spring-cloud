@@ -24,7 +24,6 @@ public class OAuthController {
 
     @RequestMapping({ "/oauth/my_approval_page" })
     public String getAccessConfirmation(Map<String, Object> model, HttpServletRequest request) throws Exception {
-        @SuppressWarnings("unchecked")
         Map<String, String> scopes = (Map<String, String>) (model.containsKey("scopes") ? model.get("scopes") : request.getAttribute("scopes"));
         List<String> scopeList = new ArrayList<>();
         for (String scope : scopes.keySet()) {

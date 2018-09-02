@@ -1,5 +1,7 @@
 package com.example.qixin;
 
+import com.example.qixin.configuration.CustomJdbcAuthorizationCodeServices;
+import com.example.qixin.configuration.CustomTokenEnhancer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -49,7 +51,7 @@ public class OAuthAuthorizationConfig extends AuthorizationServerConfigurerAdapt
     @Bean 	//使用默认的授权码
     protected AuthorizationCodeServices authorizationCodeServices() {
 
-        return new JdbcAuthorizationCodeServices(dataSource);
+        return new CustomJdbcAuthorizationCodeServices(dataSource);
     }
 
     @Override
@@ -76,6 +78,7 @@ public class OAuthAuthorizationConfig extends AuthorizationServerConfigurerAdapt
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints.approvalStore(approvalStore()) 							// oauth_approvals
                 .authorizationCodeServices(authorizationCodeServices()) 	// oauth_code
+                .tokenEnhancer(new CustomTokenEnhancer())
                 .tokenStore(tokenStore()); 								// oauth_access_token & oauth_refresh_token
     }
 
