@@ -20,16 +20,16 @@ public class MyApi extends DefaultApi20 {
         return InstanceHolder.INSTANCE;
     }
 
-	@Override
-	public String getAccessTokenEndpoint() {
-		return "http://localhost:8081/oauth/token";
-	}
+    @Override
+    public String getAccessTokenEndpoint() {
+        return "http://localhost:8081/oauth/token";
+    }
 
-	@Override
-	protected String getAuthorizationBaseUrl() {
-		return "http://localhost:8081/oauth/authorize";
-	}
-	
+    @Override
+    protected String getAuthorizationBaseUrl() {
+        return "http://localhost:8081/oauth/authorize";
+    }
+
     @Override
     public TokenExtractor<OAuth2AccessToken> getAccessTokenExtractor() {
 

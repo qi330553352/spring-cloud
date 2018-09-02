@@ -27,9 +27,11 @@ import java.io.IOException;
  * 作           者: qixin
  * 版  权   所  有: 版权所有(C)2016-2026
  */
-@Log4j2
+//@Log4j2
 @Controller
 public class IndexController {
+
+    private Logger log = LoggerFactory.getLogger(this.getClass());
 
     private static final String PROFILE_URL = "http://localhost:8082/api/profile";
 
@@ -40,8 +42,11 @@ public class IndexController {
     private static final String CALLBACK_URL = "http://localhost:8080/callback";
     private static final String SCOPE = "read";
 
+    // 为防止CSRF跨站攻击，每次请求STATE的值应该不同，可以放入Session！
+    // 由于都是localhost测试，所以session无法保持，用一个固定值。
+    private static final String STATE = "secret-rensanning";
 
-    //private static Logger logger = LoggerFactory.getLogger(IndexController.class);
+    private static Logger logger = LoggerFactory.getLogger(IndexController.class);
 
     @GetMapping("/")
     public String index() {
@@ -50,19 +55,18 @@ public class IndexController {
 
     @GetMapping("/signin")
     public void signin(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        log.info("");
-        log.debug("signin");
-        log.info("session id:{}", request.getSession().getId());
+        logger.debug("signin");
+        logger.info("session id:{}", request.getSession().getId());
 
         OAuth20Service service = new ServiceBuilder(CLIENT_ID)
                 .apiSecret(CLIENT_SECRET)
                 .scope(SCOPE)
-                .state(ConfigCommons.STATE)
+                .state(STATE)
                 .callback(CALLBACK_URL)
                 .build(MyApi.instance());
 
         String authorizationUrl = service.getAuthorizationUrl();
-        log.info("redirectURL:{}", authorizationUrl);
+        logger.info("redirectURL:{}", authorizationUrl);
 
         response.sendRedirect(authorizationUrl);
     }
@@ -71,23 +75,20 @@ public class IndexController {
     public String callback(@RequestParam(value = "code", required = false) String code,
                            @RequestParam(value = "state", required = false) String state, HttpServletRequest request,
                            HttpServletResponse response, Model model) throws Exception {
-        System.out.println();
-        System.out.println();
-        log.debug("callback");
-        log.info("授权码code:{}",code);
-        log.info("state:{}", state);
-        log.info("session id:{}", request.getSession().getId());
+        logger.debug("callback");
+        logger.info("code:{} state:{}", code, state);
+        logger.info("session id:{}", request.getSession().getId());
 
-        if (ConfigCommons.STATE.equals(state)) {
-            log.info("State OK!");
+        if (STATE.equals(state)) {
+            logger.info("State OK!");
         } else {
-            log.error("State NG!");
+            logger.error("State NG!");
         }
 
         OAuth20Service service = new ServiceBuilder(CLIENT_ID)
                 .apiSecret(CLIENT_SECRET)
                 .scope(SCOPE)
-                .state(ConfigCommons.STATE)
+                .state(STATE)
                 .callback(CALLBACK_URL)
                 .build(MyApi.instance());
 
@@ -101,14 +102,14 @@ public class IndexController {
 
     @GetMapping("/profile")
     public String profile(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
-        log.debug("profile");
+        logger.debug("profile");
 
         OAuth2AccessToken accessToken = (OAuth2AccessToken) request.getSession().getAttribute(SESSION_KEY_ACCESS_TOKEN);
 
         OAuth20Service service = new ServiceBuilder(CLIENT_ID)
                 .apiSecret(CLIENT_SECRET)
                 .scope(SCOPE)
-                .state(ConfigCommons.STATE)
+                .state(STATE)
                 .callback(CALLBACK_URL)
                 .build(MyApi.instance());
 
@@ -123,13 +124,13 @@ public class IndexController {
 
         Response resourceResponse = service.execute(oauthRequest);
 
-        log.info("code:{}", resourceResponse.getCode());
-        log.info("message:{}", resourceResponse.getMessage());
-        log.info("body:{}", resourceResponse.getBody());
+        logger.info("code:{}", resourceResponse.getCode());
+        logger.info("message:{}", resourceResponse.getMessage());
+        logger.info("body:{}", resourceResponse.getBody());
 
         JSONObject obj = new JSONObject(resourceResponse.getBody());
 
-        log.info("json:{}", obj.toString());
+        logger.info("json:{}", obj.toString());
 
         String id = obj.getString("id");
         String name = obj.getString("name");
@@ -141,6 +142,5 @@ public class IndexController {
         model.addAttribute("email", email);
         model.addAttribute("remake",remake);
     }
-
 
 }

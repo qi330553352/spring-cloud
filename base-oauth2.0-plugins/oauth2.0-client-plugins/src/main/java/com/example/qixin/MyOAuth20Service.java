@@ -14,8 +14,8 @@ public class MyOAuth20Service extends OAuth20Service {
     public MyOAuth20Service(DefaultApi20 api, OAuthConfig config) {
         super(api, config);
     }
-    
-	@Override
+
+    @Override
     protected OAuthRequest createAccessTokenRequest(String code) {
         final OAuthRequest request = new OAuthRequest(getApi().getAccessTokenVerb(), getApi().getAccessTokenEndpoint());
         final OAuthConfig config = getConfig();
@@ -33,8 +33,8 @@ public class MyOAuth20Service extends OAuth20Service {
         request.addParameter(OAuthConstants.GRANT_TYPE, OAuthConstants.AUTHORIZATION_CODE);
         request.addHeader(OAuthConstants.HEADER,
                 OAuthConstants.BASIC + ' '
-                + Base64Encoder.getInstance()
-                .encode(String.format("%s:%s", config.getApiKey(), apiSecret).getBytes(Charset.forName("UTF-8"))));
+                        + Base64Encoder.getInstance()
+                        .encode(String.format("%s:%s", config.getApiKey(), apiSecret).getBytes(Charset.forName("UTF-8"))));
         return request;
     }
 }
