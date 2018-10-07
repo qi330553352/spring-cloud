@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.example.qixin</groupId>
   <artifactId>base-file-plugins</artifactId>
   <version>1.0</version>
-  <name>Maven</name>
-  <url>http://maven.apache.org/</url>
-  <inceptionYear>2001</inceptionYear>
-
-  <modules>
-    <module>base-file-api</module>
-    <module>base-file-server</module>
-  </modules>
+  <packaging>pom</packaging>
+  <name>base-weChat-plugins</name>
+  <description>Demo project for Spring Boot</description>
 
   <parent>
     <groupId>org.springframework.boot</groupId>
@@ -21,6 +15,11 @@
     <version>2.0.2.RELEASE</version>
     <relativePath/>
   </parent>
+
+  <modules>
+    <module>base-file-api</module>
+    <module>base-file-server</module>
+  </modules>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -76,7 +75,7 @@
     </dependency>
     <!-- OBS Java SDK -->
     <dependency>
-      <groupId>com.huawei.storage</groupId>
+      <groupId>huawei</groupId>
       <artifactId>esdk-obs-java</artifactId>
       <version>2.1.22</version>
     </dependency>
