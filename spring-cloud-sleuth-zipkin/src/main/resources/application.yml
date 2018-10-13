@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: spring-cloud-sleuth-zipkin
+server:
+  port: 9411
