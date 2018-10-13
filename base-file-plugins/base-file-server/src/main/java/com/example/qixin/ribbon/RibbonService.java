@@ -1,7 +1,6 @@
 package com.example.qixin.ribbon;
 
 import com.example.qixin.entity.BaseFile;
-import com.netflix.hystrix.contrib.javanica.conf.HystrixPropertiesManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
