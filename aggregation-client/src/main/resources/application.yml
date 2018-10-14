@@ -1,9 +1,19 @@
 spring:
   application:
     name: aggregation-client
+  rabbitmq:
+    host: 192.168.93.129
+    port: 5672
+    username: admin
+    password: admin
   zipkin:
     enabled: true
-    base-url: http://127.0.0.1:9411/
+  sleuth:
+    sampler:
+      probability: 1.0    #定义抽样比率，默认为0.1
+#  zipkin:
+#    enabled: true
+#    base-url: http://127.0.0.1:9411/
 
 server:
   port: 8888
