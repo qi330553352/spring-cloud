@@ -6,7 +6,7 @@
   <artifactId>base-file-plugins</artifactId>
   <version>1.0</version>
   <packaging>pom</packaging>
-  <name>base-weChat-plugins</name>
+  <name>base-file-plugins</name>
   <description>Demo project for Spring Boot</description>
 
   <parent>
@@ -91,11 +91,11 @@
       <artifactId>spring-cloud-starter-sleuth</artifactId>
       <version>2.0.1.RELEASE</version>
     </dependency>
-    <dependency>
+    <!--<dependency>
       <groupId>org.springframework.cloud</groupId>
       <artifactId>spring-cloud-sleuth-zipkin-stream</artifactId>
       <version>1.3.4.RELEASE</version>
-    </dependency>
+    </dependency>-->
     <dependency>
       <groupId>org.springframework.cloud</groupId>
       <artifactId>spring-cloud-starter-stream-rabbit</artifactId>

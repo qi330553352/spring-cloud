@@ -1,14 +1,9 @@
 package com.example.qixin.ribbon;
 
-import com.example.qixin.entity.BaseFile;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.client.ServiceInstance;
-import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
-import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
+import org.springframework.stereotype.Service;
 
 /**
  * 创  建   时  间： 2018/10/7 22:52
@@ -22,7 +17,7 @@ public class RibbonService {
     @Autowired
     private LoadBalancerClient loadBalancerClient;  //负载均衡客户端
 
-    private List<BaseFile> list(){
+   /* private List<T> list<T>(){
         ServiceInstance instance = loadBalancerClient.choose("");
         StringBuilder sb = new StringBuilder();
         sb.append("http://");
@@ -32,9 +27,9 @@ public class RibbonService {
         sb.append("/list");
         System.out.println(sb.toString());
         RestTemplate rt = new RestTemplate();
-        ParameterizedTypeReference<List<BaseFile>> typeRef = new ParameterizedTypeReference<List<BaseFile>>(){};
+        ParameterizedTypeReference<List<T>> typeRef = new ParameterizedTypeReference<List<BaseFile>>(){};
         return null;
-    }
+    }*/
 
 
 }
