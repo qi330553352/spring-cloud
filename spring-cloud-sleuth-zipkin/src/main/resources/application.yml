@@ -1,5 +1,25 @@
 spring:
   application:
     name: spring-cloud-sleuth-zipkin
+  sleuth:
+    enabled: false
+  rabbitmq:
+    host: 192.168.93.129
+    port: 5672
+    username: admin
+    password: admin
+  datasource:
+    schema: classpath:/mysql.sql
+    url: jdbc:mysql://localhost:3306/zipkin?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&useSSL=false
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+    initialize: true
+    continue-on-error: true
+
 server:
   port: 9411
+
+zipkin:
+  storage:
+    type: mysql
