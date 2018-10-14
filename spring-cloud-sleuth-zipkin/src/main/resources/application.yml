@@ -3,6 +3,8 @@ spring:
     name: spring-cloud-sleuth-zipkin
   sleuth:
     enabled: false
+    sampler:
+      probability: 1.0    #定义抽样比率，默认为0.1
   rabbitmq:
     host: 192.168.93.129
     port: 5672
