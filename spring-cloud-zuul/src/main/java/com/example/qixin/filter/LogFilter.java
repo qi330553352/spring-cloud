@@ -6,7 +6,6 @@ import com.netflix.zuul.exception.ZuulException;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
 
-import javax.management.RuntimeErrorException;
 import javax.servlet.http.HttpServletRequest;
 
 /** 23种设计模式中行为类型-模板方法模式

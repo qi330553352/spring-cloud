@@ -5,6 +5,7 @@ spring:
   application:
     name: spring-cloud-zuul
 
+
 eureka:
   client:
     service-url:
