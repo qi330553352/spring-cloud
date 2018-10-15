@@ -4,6 +4,19 @@ server:
 spring:
   application:
     name: spring-cloud-zuul
+  redis:
+    database: 0
+    host: 192.168.93.129
+    port: 6379
+    password:
+    timeout: 2000
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 8
+        min-idle: 0
+
 
 
 
@@ -15,3 +28,21 @@ eureka:
     prefer-ip-address: true
     hostname: ${spring.cloud.client.ip-address}
     instance-id: ${spring.cloud.client.ip-address}:${server.port}
+
+zuul:
+  routes:
+    aggregation-client:
+      path: /aggregation-client/**
+      serviceId: aggregation-client
+  ratelimit:          #参考资料：https://www.cnblogs.com/zhangjianbin/p/9110451.html
+    enabled: true
+    repository: redis
+    behind-proxy: true
+    policy-list:
+      aggregation-client[0]:
+        limit: 3
+        refresh-interval: 120
+        type: ORIGIN
+
+
+
