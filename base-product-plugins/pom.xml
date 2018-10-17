@@ -9,6 +9,11 @@
 	<name>base-product-plugins</name>
 	<description>商品服务</description>
 
+	<modules>
+		<module>base-product-api</module>
+		<module>base-product-server</module>
+	</modules>
+
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
@@ -23,17 +28,6 @@
 	</properties>
 
 	<dependencies>
-		<dependency>
-			<groupId>com.example.qixin</groupId>
-			<artifactId>base-product-api</artifactId>
-			<version>1.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.example.qixin</groupId>
-			<artifactId>base-product-server</artifactId>
-			<version>1.0</version>
-		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
