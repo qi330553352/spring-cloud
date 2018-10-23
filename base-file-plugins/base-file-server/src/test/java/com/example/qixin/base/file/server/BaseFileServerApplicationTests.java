@@ -1,22 +1,13 @@
 package com.example.qixin.base.file.server;
 
-import com.example.qixin.design.factory.picture.PictureFactory;
 import com.obs.services.ObsClient;
-import net.coobird.thumbnailator.Thumbnails;
-import net.coobird.thumbnailator.geometry.Position;
-import net.coobird.thumbnailator.geometry.Positions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.imageio.ImageIO;
-import javax.imageio.stream.ImageInputStream;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 
 // https://blog.csdn.net/layman1024/article/details/78273451 图片处理
 @RunWith(SpringRunner.class)
@@ -33,11 +24,11 @@ public class BaseFileServerApplicationTests {
 		//Thumbnails.of("D:\\log\\123.jpg").size(200, 300).toFile("D:\\log\\1234.jpg");
 		File file = new File("D:\\log\\123.jpg");
 		File file4 = new File("D:\\log\\1234.png");
-		InputStream inputStream = PictureFactory.instance(file).watermark(200,300,Positions.BOTTOM_RIGHT,ImageIO.read(file4),0.5f);
-		System.out.println();
-		System.out.println();
+//		InputStream inputStream = PictureFactory.instance(file).watermark(200,300,Positions.BOTTOM_RIGHT,ImageIO.read(file4),0.5f);
+//		System.out.println();
+//		System.out.println();
 		// 使用访问OBS
-		obsClient.putObject("static-resource-dev", "event/test.jpg",inputStream);
+		//obsClient.putObject("static-resource-dev", "event/test.jpg",inputStream);
 		// 关闭obsClient
 		obsClient.close();
 	}
