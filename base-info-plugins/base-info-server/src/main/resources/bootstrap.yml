@@ -1,0 +1,27 @@
+server:
+  port: 8661
+
+spring:
+  cloud:
+    config:
+      discovery:
+        enabled: true #开启读取配置中心配置
+        service-id: spring-cloud-config #配置中心的应用名
+      label: master
+      profile: default
+      name: application
+    bus:
+      refresh:
+        enabled: true
+  rabbitmq:
+    host: ${rabbitmq.host}
+    port: ${rabbitmq.port}
+    username: ${rabbitmq.username}
+    password: ${rabbitmq.password}
+    virtual-host: ${rabbitmq.virtual-host}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'  #暴露bus-refresh节点，通过此节点刷新配置
