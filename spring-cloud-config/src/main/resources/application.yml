@@ -8,8 +8,8 @@ spring:
     config:
       server:
         git:
-          uri: https://example.git/
-          username: root
-          password: root
-          searchPaths: '{application}'
+          uri: https://github.com/qi330553352/spring-cloud.git
+          search-paths: config-center
+          username: 330553352@qq.com
+          password: Qixin123
           default-label: master
