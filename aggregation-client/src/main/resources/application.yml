@@ -1,22 +1,14 @@
 spring:
   application:
     name: aggregation-client
-  rabbitmq:
-    host: 192.168.93.129
-    port: 5672
-    username: admin
-    password: admin
   zipkin:
     enabled: true
   sleuth:
     sampler:
-      probability: 1.0    #定义抽样比率，默认为0.1
-#  zipkin:
-#    enabled: true
-#    base-url: http://127.0.0.1:9411/
-
-server:
-  port: 8888
+      probability: 1.0
+    bus:
+      refresh:
+        enabled: true
 
 eureka:
   client:
@@ -26,5 +18,10 @@ eureka:
     prefer-ip-address: true
     hostname: ${spring.cloud.client.ip-address}
     instance-id: ${spring.cloud.client.ip-address}:${server.port}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: ["*"]
 
 

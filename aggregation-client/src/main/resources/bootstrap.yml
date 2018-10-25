@@ -1,0 +1,17 @@
+server:
+  port: 8888
+
+spring:
+  cloud:
+    config:
+      discovery:
+        enabled: true #开启读取配置中心配置
+        service-id: spring-cloud-config #配置中心的应用名
+      label: master
+      profile: default
+  rabbitmq:
+    host: ${rabbitmq.host}
+    port: ${rabbitmq.port}
+    username: ${rabbitmq.username}
+    password: ${rabbitmq.password}
+    virtual-host: ${rabbitmq.virtual-host}
