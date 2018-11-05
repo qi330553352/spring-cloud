@@ -22,6 +22,8 @@ public class RestTestController {
 
     @Value("${configuration.name}")
     private String name;
+    @Autowired
+    private RestTemplate template;
 
     @RequestMapping("/config")
     public String config(){
@@ -44,4 +46,12 @@ public class RestTestController {
         log.info("str:{}",str);
         return str;
     }
+
+    @GetMapping("/hello")
+    public String hello(){
+        String str = template.getForEntity("http://www.baidu.com/",String.class).getBody();
+        return str;
+    }
+
+
 }
