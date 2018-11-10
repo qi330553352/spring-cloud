@@ -12,18 +12,16 @@ spring:
   sleuth:
     sampler:
       probability: 1.0    #定义抽样比率，默认为0.1
-#  zipkin:
-#    enabled: true
-#    base-url: http://127.0.0.1:9411/
-
-server:
-  port: 8663
-
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka/
-  instance:
-    prefer-ip-address: true
-    hostname: ${spring.cloud.client.ip-address}
-    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+  cloud: #消息渠道配置信息
+    stream:
+      instanceCount: 2    #指定了当前消费者的总实例数量
+      instanceIndex: 0    #设置当前实例的索引号，从0开始
+      binders:
+        input:
+          destination: exchangeProduct  # 对应 MQ 是 exchange
+          group: groupProduct            #具体分组 对应 MQ 是 队列名称 并且持久化队列
+          consumer:
+            partitioned: true   #开启消费者分区功能
+  zipkin:
+    enabled: true
+    base-url: http://127.0.0.1:9411/

@@ -3,6 +3,7 @@ package com.example.qixin.service;
 import com.example.qixin.entity.UserFile;
 import com.example.qixin.feign.UserFileApi;
 import com.example.qixin.repository.UserFileRepository;
+import com.mongodb.Mongo;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
@@ -27,7 +28,7 @@ public class UserFileServiceImpl implements UserFileApi {
 
     @Override
     public Mono<UserFile> findById(@PathVariable("id") String id) {
-
+        log.info(repository.findById(id).block());
         return repository.findById(id);
     }
 

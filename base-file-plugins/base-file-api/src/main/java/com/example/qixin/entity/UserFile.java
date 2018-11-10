@@ -14,7 +14,6 @@ import java.util.Date;
  */
 @Data
 @Document(collection = "UserFile")
-
 public class UserFile {
 
     @Id

@@ -3,6 +3,7 @@ spring:
     name: aggregation-client
   zipkin:
     enabled: true
+    base-url: http://127.0.0.1:8888
   sleuth:
     sampler:
       probability: 1.0
@@ -13,7 +14,7 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: http://127.0.0.1:8761/eureka/
+      defaultZone: http://192.168.93.129:8761/eureka/
   instance:
     prefer-ip-address: true
     hostname: ${spring.cloud.client.ip-address}
