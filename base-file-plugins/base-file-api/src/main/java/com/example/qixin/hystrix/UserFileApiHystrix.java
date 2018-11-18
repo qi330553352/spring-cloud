@@ -3,10 +3,12 @@ package com.example.qixin.hystrix;
 import com.example.qixin.entity.UserFile;
 import com.example.qixin.feign.UserFileApi;
 import lombok.extern.log4j.Log4j2;
+import org.reactivestreams.Publisher;
 import org.springframework.stereotype.Component;
 import feign.hystrix.FallbackFactory;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
@@ -30,7 +32,31 @@ public class UserFileApiHystrix implements FallbackFactory<UserFileApi> {
             }
 
             @Override
+            public Flux<UserFile> findAll() {
+
+                return null;
+            }
+
+            @Override
+            public Flux<UserFile> findByFileName(String fileName) {
+
+                return null;
+            }
+
+            @Override
             public Mono<UserFile> save(@RequestBody UserFile bean) {
+
+                return null;
+            }
+
+            @Override
+            public Mono<UserFile> create(@RequestBody Publisher<UserFile> beans) {
+
+                return null;
+            }
+
+            @Override
+            public Flux<UserFile> batchSave() {
 
                 return null;
             }

@@ -1,9 +1,12 @@
 package com.example.qixin.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /** 用户文件
@@ -14,11 +17,24 @@ import java.util.Date;
  */
 @Data
 @Document(collection = "UserFile")
-public class UserFile {
+public class UserFile implements Serializable{
 
     @Id
     private String id;
     private String fileName;
     private Date createTime;
+
+    public UserFile() {
+
+    }
+
+    public UserFile(String id) {
+        this.id = id;
+    }
+
+    public UserFile(String fileName, Date createTime) {
+        this.fileName = fileName;
+        this.createTime = createTime;
+    }
 
 }
