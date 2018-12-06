@@ -22,6 +22,10 @@
 		<module>hystrix-ribbon-cache</module>
 		<module>hystrix-ribbon-batch</module>
 		<module>hystrix-ribbon-breaker</module>
+		<module>hystrix-ribbon-threadpool</module>
+		<module>hystrix-ribbon-semaphore</module>
+		<module>hystrix-feign-fallback</module>
+		<module>hystrix-feign-factory</module>
 	</modules>
 
 	<properties>
