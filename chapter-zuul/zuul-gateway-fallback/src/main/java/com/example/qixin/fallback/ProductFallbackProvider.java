@@ -1,0 +1,73 @@
+package com.example.qixin.fallback;
+
+import org.springframework.cloud.netflix.zuul.filters.route.FallbackProvider;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.client.ClientHttpResponse;
+import org.springframework.stereotype.Component;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.Charset;
+
+/**
+ * 创  建   时  间： 2018/12/20 0:45
+ * 版           本: V1.0
+ * 作           者: qixin
+ * 版  权   所  有: 版权所有(C)2016-2026
+ */
+@Component
+public class ProductFallbackProvider implements FallbackProvider {
+
+
+    @Override
+    public String getRoute() {
+        // 代表为那个服务提供fallback
+        return "zuul-product-server";
+    }
+
+    @Override
+    public ClientHttpResponse fallbackResponse(String s, Throwable throwable) {
+        return new ClientHttpResponse(){
+
+            @Override
+            public InputStream getBody() throws IOException {
+                String input="商品服务不可用，请联系管理员！";
+                return new ByteArrayInputStream(input.getBytes());
+            }
+
+            @Override
+            public HttpHeaders getHeaders() {
+                HttpHeaders header=new HttpHeaders();
+                MediaType mt=new MediaType("application","json", Charset.forName("UTF-8"));
+                header.setContentType(mt);
+                return header;
+            }
+
+            @Override
+            public void close() {
+            }
+
+            @Override
+            public int getRawStatusCode() throws IOException {
+                // httpresponse的fallback的状态码，int值
+                return HttpStatus.OK.value();
+            }
+
+            @Override
+            public HttpStatus getStatusCode() throws IOException {
+                // httpresponse的fallback的状态码，HttpStatus值
+                return HttpStatus.OK;
+            }
+
+            @Override
+            public String getStatusText() throws IOException {
+                // httpresponse的fallback的状态码，string
+                return HttpStatus.OK.name();
+            }
+
+        };
+    }
+}
