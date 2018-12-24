@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/feign-aggregation" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/feign-aggregation-gzip" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/feign-product-plugins" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/feign-product-plugins-gzip" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/feign-product-plugins-gzip/feign-product-gzip-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/feign-product-plugins-gzip/feign-product-gzip-server" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/feign-product-plugins/feign-product-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/feign-product-plugins/feign-product-server" charset="UTF-8" />
+  </component>
+</project>

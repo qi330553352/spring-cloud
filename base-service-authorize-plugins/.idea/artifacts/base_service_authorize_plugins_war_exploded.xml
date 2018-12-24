@@ -1,0 +1,16 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="base-service-authorize-plugins:war exploded">
+    <output-path>$PROJECT_DIR$/target/base-service-authorize-plugins</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="base-service-authorize-plugins" />
+        </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/target/base-service-authorize-plugins/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="javaee-facet-resources" facet="base-service-authorize-plugins/web/Web" />
+    </root>
+  </artifact>
+</component>
