@@ -11,7 +11,7 @@ public class TestController {
 
 	@Value("${configuration.name}")
 	private String name;
-	
+
 	@GetMapping("/test")
 	public String test(){
 		
