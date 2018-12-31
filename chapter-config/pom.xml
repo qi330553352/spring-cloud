@@ -18,6 +18,13 @@
 	<modules>
 		<module>config-server</module>
     	<module>config-client</module>
+    	<module>config-client-refresh</module>
+		<module>config-server-encrypt-symmetric</module>
+		<module>config-client-encrypt-symmetric</module>
+		<module>config-server-encrypt-rsa</module>
+		<module>config-client-encrypt-rsa</module>
+		<module>config-server-encrypt-security</module>
+		<module>config-client-encrypt-security</module>
     </modules>
 
 	<properties>
